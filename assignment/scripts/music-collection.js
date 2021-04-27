@@ -1,10 +1,11 @@
 console.log('***** Music Collection *****')
 let collection = []
-function addToCollection(title, artist, yearPublished){
+function addToCollection(title, artist, yearPublished,tracks){
   let newAlbum = {
     title: title,
     artist: artist,
-    yearPublished: yearPublished
+    yearPublished: yearPublished,
+    tracks: []
   }
   collection.push(newAlbum)
   return newAlbum
@@ -22,7 +23,7 @@ console.log(collection)
 function showCollection(array){
   console.log(array.length);
   for(let i = 0; i < array.length;i++){
-    console.log(array[i].title + " by " + array[i].artist + ", published in " + array[i].yearPublished);
+    console.log(array[i].title + " by " + array[i].artist + ", published in " + array[i].yearPublished );
   }
 }
 showCollection(collection)
@@ -44,6 +45,17 @@ function findByArtist(artist){
 console.log(findByArtist("Mac Miller"));
 console.log(findByArtist("Led Zeppelin"));
 
-
+// Create universal input that can equal artist, year, or title
+function search(object1, object2){
+  if ((object1 == "")&&(object2 == "")){
+    return collection
+  }
+  let searchArray = [];
+  for(let i in collection){
+    if((collection[i].artist == object1 || collection[i].yearPublished == object1) && (collection[i].artist == object2 || collection[i].yearPublished == object2)){
+      searchArray.push(collection[i])
+    }
+  }
+  return searchArray;
+}
 console.log(search("Mac Miller", "2018"));
-console.log(search("Led Zeppelin", "1975"));
